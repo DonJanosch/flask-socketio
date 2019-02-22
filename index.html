@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Chatt-Room</title>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.slim.js"></script>
+    <script
+			  src="https://code.jquery.com/jquery-3.3.1.min.js"
+			  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+			  crossorigin="anonymous"></script>
+  </head>
+  <body>
+
+    <script type="text/javascript">
+      $(document).ready(function(){
+        var socket = io.connect('https://127.0.0.1:5000')
+
+        socket.on('connect', function() {
+          socket.send('User has connected');
+        });
+        socket.on('message', function(msg){
+          $("#messages").append('<li>'+msg+'</li>')
+        });
+      });
+    </script>
+
+    <ul id="messages"></ul>
+    <input type="text" id="myMessage" name="" value="">
+    <button type="button" id="sendButton" name="button">Send</button>
+  </body>
+</html>
